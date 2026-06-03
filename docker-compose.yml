@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - ./:/code:ro
+    environment:
+      - DATABASE_URL=postgresql://postgres:bright@db:5432/dockert
+    ports:
+      - "8000"
+
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=bright
+      - POSTGRES_DB=dockert
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: dockert_network
+    driver: bridge

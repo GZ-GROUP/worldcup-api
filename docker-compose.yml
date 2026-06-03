@@ -8,7 +8,7 @@ services:
     volumes:
       - ./:/code:ro
     environment:
-      - DATABASE_URL=postgresql://postgres:bright@db:5432/dockert
+      - DATABASE_URL=postgresql://postgres:secret@db:5432/worldcup
     ports:
       - "8000"
 
@@ -18,8 +18,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=bright
-      - POSTGRES_DB=dockert
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=worldcup
 
 volumes:
   postgres_data:

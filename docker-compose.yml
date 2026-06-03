@@ -6,14 +6,13 @@ services:
     container_name: wc-polla-web
     depends_on:
       db:
-        condition: service_healthy  # ← Espera a que DB esté saludable
+        condition: service_healthy
     environment:
       - DATABASE_URL=postgresql://polla:secret@db:5432/worldcup
-    ports:
-      - "8000:8000"
     networks:
       - worldcup_network
     restart: on-failure
+    # ❌ NO exponemos puertos en Dokploy (lo maneja automáticamente)
 
   db:
     image: postgres:15-alpine
@@ -24,11 +23,8 @@ services:
       - POSTGRES_DB=worldcup
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
     networks:
       - worldcup_network
-    # ✅ IMPORTANTE: healthcheck para saber cuándo está lista
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U polla -d worldcup"]
       interval: 10s

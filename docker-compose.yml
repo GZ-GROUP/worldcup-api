@@ -8,7 +8,7 @@ services:
     volumes:
       - ./:/code:ro
     environment:
-      - DATABASE_URL=postgresql://postgres:secret@db:5432/worldcup
+      - DATABASE_URL=postgresql://polla:secret@db:5432/worldcup
     ports:
       - "8000"
 
@@ -17,7 +17,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=polla
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=worldcup
 

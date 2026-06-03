@@ -26,5 +26,5 @@ volumes:
 
 networks:
   default:
-    name: dockert_network
+    name: worldcup_network
     driver: bridge

@@ -201,3 +201,8 @@ def delete_match(match_id: int, session: SessionDep):
     session.commit()
     
     return {"detail": "Partido eliminado exitosamente"}
+@app.get("/matches/")
+def list_matches(session: SessionDep) -> list[Matches]:
+    """Listar todos los partidos"""
+    matches = session.exec(select(Matches)).all()
+    return matches

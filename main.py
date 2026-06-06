@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, date
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from dotenv import load_dotenv
 
@@ -131,6 +132,15 @@ async def lifespan(app: FastAPI):
 
 # ============= APLICACIÓN =============
 app = FastAPI(lifespan=lifespan)
+
+# CORS: permitir cualquier origen (wildcard). NOTE: don't set allow_credentials=True with "*".
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=False,
+)
 
 # ============= ENDPOINTS =============
 
